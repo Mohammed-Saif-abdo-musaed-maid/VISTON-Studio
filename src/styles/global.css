@@ -1,0 +1,2135 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-primary: #15171B;
+  --bg-secondary: #1C1F24;
+  --bg-panel: #202329;
+  --bg-panel-alt: #252930;
+  --bg-hover: #292D34;
+  --bg-active: #343941;
+  --bg-selected: #4f8cff22;
+  --border: #30343B;
+  --border-light: #383d46;
+  --text: #E6E8EB;
+  --text-dim: #9BA1AA;
+  --text-muted: #666C75;
+  --accent: #4f8cff;
+  --accent-hover: #3b7aef;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --ruler-bg: #18191e;
+  --input-bg: #1b1e24;
+  --input-border: #3b4252;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  --toolbar-w: 44px;
+  --panel-w: 260px;
+  --menubar-h: 28px;
+  --tabs-h: 30px;
+  --options-h: 34px;
+  --statusbar-h: 26px;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg-primary);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.vs-workspace {
+  display: grid;
+  grid-template-rows: var(--menubar-h) var(--tabs-h) var(--options-h) 1fr var(--statusbar-h);
+  grid-template-columns: var(--toolbar-w) minmax(0, 1fr);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.vs-mainbar {
+  grid-column: 2;
+  grid-row: 4;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.vs-menubar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  padding: 0 4px;
+  gap: 1px;
+}
+
+.vs-app-logo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  line-height: 0;
+}
+
+.vs-app-logo-btn:hover {
+  background: var(--bg-hover);
+}
+
+.vs-app-logo-btn img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.vs-menu-item {
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 12px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.vs-menu-item:hover,
+.vs-menu-item.active {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: 200px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  padding: 4px;
+}
+
+.vs-menu-item-sub {
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  gap: 24px;
+  position: relative;
+}
+
+.vs-menu-item-sub:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.vs-menu-item-sub .vs-menu-item-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0.85;
+}
+
+.vs-menu-item-sub:hover .vs-menu-item-icon {
+  color: #fff;
+}
+
+.vs-menu-item-sub .vs-menu-item-label {
+  flex: 0 0 auto;
+}
+
+.vs-menu-dropdown-sub {
+  display: none;
+  left: 100%;
+  top: -5px;
+}
+
+.vs-menu-item-sub:hover > .vs-menu-dropdown-sub,
+.vs-menu-item-sub.has-submenu:focus-within > .vs-menu-dropdown-sub {
+  display: block;
+}
+
+.vs-menu-item-sub .submenu-arrow {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.vs-menu-item-sub.has-submenu:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.vs-menu-item-sub .shortcut {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+.vs-menu-item-sub:hover .shortcut {
+  color: rgba(255,255,255,0.7);
+}
+
+.vs-menu-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 8px;
+}
+
+.vs-options-bar {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: 0 8px;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.vs-options-bar label {
+  color: var(--text-dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.vs-options-bar input[type="number"],
+.vs-options-bar input[type="text"],
+.vs-options-bar select {
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-family: var(--font);
+  width: 60px;
+}
+
+.vs-options-bar input[type="color"] {
+  width: 24px;
+  height: 22px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  padding: 1px;
+  background: var(--input-bg);
+  cursor: pointer;
+}
+
+.vs-options-bar input[type="range"] {
+  width: 80px;
+  accent-color: var(--accent);
+}
+
+.vs-options-bar select {
+  width: auto;
+  min-width: 60px;
+}
+
+.vs-options-bar button {
+  padding: 3px 10px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 11px;
+  font-family: var(--font);
+}
+
+.vs-options-bar button:hover {
+  background: var(--accent-hover);
+}
+
+.vs-options-bar button.secondary {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-options-bar .vs-opt-toggle {
+  background: var(--bg-hover);
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  min-width: 22px;
+}
+.vs-options-bar .vs-opt-toggle.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent-hover);
+}
+
+.vs-options-bar .sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+
+.vs-toolbar {
+  grid-column: 1;
+  grid-row: 4;
+  background: var(--bg-panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.vs-tool-btn {
+  width: 36px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 15px;
+  border: 1px solid transparent;
+  background: none;
+  font-family: var(--font);
+  transition: background 0.1s;
+  position: relative;
+  padding: 0;
+}
+
+.vs-tool-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-tool-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent-hover);
+}
+
+.vs-tool-btn[title]::after {
+  content: attr(title);
+  display: none;
+}
+
+.vs-top-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px;
+  height: 32px;
+  flex-shrink: 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.vs-top-tool-btn {
+  width: 30px;
+  height: 26px;
+  font-size: 14px;
+}
+
+.vs-top-tool-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.vs-toolbar-sep {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 5px;
+}
+
+.vs-toolbar-sep:focus,
+.vs-top-tool-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.vs-canvas-area {
+  grid-column: auto;
+  grid-row: auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.vs-canvas-element {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.vs-panel-resizer {
+  flex: 0 0 5px;
+  cursor: col-resize;
+  background: var(--border);
+  transition: background 0.12s;
+  touch-action: none;
+}
+.vs-panel-resizer:hover,
+.vs-panel-resizer:active {
+  background: var(--accent);
+}
+
+.vs-panels {
+  flex: 0 0 var(--panel-w);
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.vs-panel {
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.vs-panel.grow {
+  flex: 1 1 auto;
+}
+
+.vs-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg-panel-alt);
+  flex-shrink: 0;
+}
+
+.vs-panel-header:hover {
+  background: var(--bg-hover);
+}
+
+.vs-panel-toggle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.vs-panel-toggle .vs-caret {
+  display: inline-block;
+  width: 10px;
+  font-size: 9px;
+  color: var(--text-muted);
+  transition: transform 0.12s;
+}
+
+.vs-panel-toggle .vs-caret.open {
+  transform: rotate(90deg);
+}
+
+.vs-panel-header-right {
+  display: flex;
+  align-items: center;
+  padding-right: 6px;
+  gap: 2px;
+}
+
+.vs-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  flex-shrink: 0;
+}
+
+.vs-panel-actions button {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  color: var(--text-dim);
+  font-size: 11px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.vs-panel-actions button:hover:not(:disabled) {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.vs-panel-body {
+  padding: 6px;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.vs-panel:not(.grow) .vs-panel-body {
+  flex: 0 1 auto;
+  max-height: 184px;
+}
+
+.vs-panel-body.collapsed {
+  display: none;
+}
+
+.vs-swatches {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vs-swatches-group {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.vs-swatches-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.vs-swatch {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.08s ease;
+}
+
+.vs-swatch:hover {
+  transform: scale(1.12);
+  border-color: #fff;
+}
+
+.vs-swatch-x {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  visibility: hidden;
+}
+
+.vs-swatch:hover .vs-swatch-x {
+  visibility: visible;
+}
+
+.vs-swatches-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.vs-swatches-add input[type="color"] {
+  width: 26px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+}
+
+.vs-swatches-add input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.vs-swatches-add button {
+  padding: 3px 8px;
+}
+
+.vs-layer-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  gap: 6px;
+  font-size: 12px;
+  min-height: 32px;
+}
+
+.vs-layer-item:hover {
+  background: var(--bg-hover);
+}
+
+.vs-layer-item.selected {
+  background: var(--bg-selected);
+  border: 1px solid var(--accent);
+}
+
+.vs-layer-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  background: var(--bg-active);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-layer-thumb canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.vs-layer-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+}
+
+.vs-layer-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.vs-layer-actions button {
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-layer-actions button:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-layer-actions button.off {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+.vs-statusbar {
+  grid-column: 1 / -1;
+  grid-row: 5;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-dim);
+  gap: 16px;
+  height: var(--statusbar-h);
+}
+
+.vs-statusbar .info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vs-statusbar .spacer {
+  flex: 1;
+}
+
+.vs-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-modal {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 64px rgba(0,0,0,0.6);
+  min-width: 360px;
+  max-width: 560px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.vs-modal-header {
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vs-modal-body {
+  padding: 18px;
+  overflow-y: auto;
+  font-size: 12px;
+}
+
+.vs-modal-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.vs-field {
+  margin-bottom: 12px;
+}
+
+.vs-field label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.vs-field input,
+.vs-field select {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: var(--font);
+}
+
+.vs-field input[type="color"] {
+  width: 100%;
+  height: 32px;
+}
+
+.vs-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-hover);
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.vs-btn:hover {
+  background: var(--bg-active);
+}
+
+.vs-btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.vs-btn.primary:hover {
+  background: var(--accent-hover);
+}
+
+.vs-histogram-canvas {
+  width: 100%;
+  height: 100px;
+  background: #181a1f;
+  border-radius: var(--radius-sm);
+}
+
+.vs-properties-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.vs-prop-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.vs-prop-row label {
+  width: 28px;
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.vs-prop-row input {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text);
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  width: 0;
+}
+
+.vs-history-item {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.vs-history-item:hover {
+  background: var(--bg-hover);
+}
+
+.vs-history-item.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.vs-history-item.past {
+  opacity: 0.4;
+}
+
+.vs-busy-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text);
+  pointer-events: none;
+}
+
+.vs-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: vs-spin 0.8s linear infinite;
+}
+
+@keyframes vs-spin {
+  to { transform: rotate(360deg); }
+}
+
+.vs-dialog-filter {
+  min-width: 440px;
+}
+
+.vs-dialog-filter .preview-area {
+  background: #181a1f;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+}
+
+.vs-dialog-filter .preview-area canvas {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.vs-dialog-filter .controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vs-dialog-filter .slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vs-dialog-filter .slider-row label {
+  width: 80px;
+  text-align: right;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.vs-dialog-filter .slider-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.vs-dialog-filter .slider-row .value {
+  width: 40px;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.vs-dialog-filter .filter-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.vs-dialog-filter .filter-error {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: 11px;
+  word-break: break-word;
+}
+
+.vs-dialog-filter .slider-row .vs-select {
+  flex: 1;
+  min-width: 0;
+}
+
+.vs-dialog-filter .slider-row:hover label {
+  color: var(--text);
+}
+
+.morpho-targets {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.morpho-targets .vs-btn {
+  flex: 1;
+  font-size: 11px;
+  padding: 4px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.morpho-targets .vs-btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.morpho-kernel-input {
+  flex: 1;
+  min-width: 0;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+}
+
+.morpho-preview-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+}
+
+.vs-dialog-morpho .slider-row label {
+  width: 120px;
+}
+
+.morpho-preview-holder canvas {
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+}
+
+.morpho-stats {
+  margin-top: 10px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.morpho-stats-row {
+  color: var(--text-muted);
+}
+
+/* ── document tabs ── */
+.vs-tabs-bar {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.vs-tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  font-size: 11px;
+  color: var(--text-dim);
+  background: transparent;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+.vs-tab:hover {
+  background: var(--bg-hover);
+}
+.vs-tab.active {
+  background: var(--bg-panel-alt);
+  color: var(--text-dim);
+  font-weight: 600;
+}
+.vs-tab-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vs-tab-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+.vs-tab-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+}
+
+/* ── recovery row helper ── */
+.vs-recovery-row:last-child {
+  border-bottom: none;
+}
+
+/* ?? accessibility + interaction affordances ?? */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+
+.vs-btn:disabled,
+.vs-tool-btn:disabled,
+.vs-options-bar button:disabled,
+button.vs-panel-toggle:focus-visible,
+.vs-tab:focus-visible {
+  outline-offset: -2px;
+}
+
+.vs-btn:disabled,
+.vs-options-bar button:disabled,
+.vs-panel-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.vs-tool-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  color: var(--text-muted);
+}
+
+.vs-layer-item:disabled,
+.vs-layer-item.dragging {
+  opacity: 0.55;
+}
+
+/* ?? statusbar: zoom controls + error surfacing ?? */
+.vs-statusbar button.sb-btn {
+  border: 1px solid transparent;
+  background: none;
+  color: var(--text-dim);
+  font-size: 11px;
+  font-family: var(--font);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.vs-statusbar button.sb-btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.vs-statusbar button.sb-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.vs-statusbar .sb-zoom {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.vs-statusbar .sb-zoom-value {
+  min-width: 46px;
+  text-align: center;
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+.vs-statusbar .sb-error {
+  color: var(--danger);
+}
+
+/* ?? contextual menu (layers) ?? */
+.vs-context-menu {
+  position: fixed;
+  z-index: 1500;
+  min-width: 190px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.5);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.vs-context-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-dim);
+  font-size: 12px;
+  font-family: var(--font);
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+.vs-context-menu button:hover:not(:disabled) {
+  background: var(--accent);
+  color: #fff;
+}
+.vs-context-menu button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.vs-context-menu .vs-context-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 3px 8px;
+}
+.vs-context-menu .vs-context-shortcut {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.vs-context-menu button:hover .vs-context-shortcut {
+  color: rgba(255,255,255,0.7);
+}
+
+/* ?? layers: drag reorder + badges ?? */
+.vs-layer-drop-indicator {
+  height: 2px;
+  margin: -1px 6px 0;
+  background: var(--accent);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+.vs-layer-badge {
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 0 4px;
+  line-height: 14px;
+  flex-shrink: 0;
+}
+.vs-layer-badge.adj { background: rgba(245,158,11,0.18); color: var(--warning); }
+.vs-layer-badge.group { background: rgba(79,140,255,0.16); color: var(--accent); }
+.vs-layer-badge.clip { background: rgba(34,197,94,0.16); color: var(--success); font-weight: 600; }
+.vs-layer-badge.mask { background: rgba(156,163,175,0.16); color: var(--text-dim); font-weight: 600; }
+.vs-layer-indent {
+  width: 12px;
+  border-left: 2px solid var(--border-light);
+  margin-right: 2px;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+.vs-group-caret {
+  display: inline-block;
+  width: 10px;
+  color: var(--text-muted);
+  font-size: 9px;
+  transition: transform 0.12s;
+}
+.vs-group-caret.open { transform: rotate(90deg); }
+
+.vs-layer-item .vs-layer-actions button { opacity: 0; }
+.vs-layer-item:hover .vs-layer-actions button,
+.vs-layer-item.selected .vs-layer-actions button { opacity: 1; }
+
+/* ?? properties ?? */
+.vs-props-empty {
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 6px;
+  line-height: 1.5;
+}
+.vs-doc-props {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.vs-doc-props .vs-field { margin-bottom: 0; }
+.vs-field.compact input,
+.vs-field.compact select {
+  padding: 4px 6px;
+  font-size: 11px;
+}
+.vs-multi-hint {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+/* ?? responsive ?? */
+@media (max-width: 900px) {
+  :root {
+    --panel-w: min(280px, 34vw);
+  }
+}
+@media (max-width: 640px) {
+  :root {
+    --toolbar-w: 40px;
+    --options-h: 32px;
+    --statusbar-h: 24px;
+  }
+  .vs-statusbar {
+    gap: 8px;
+    padding: 0 6px;
+  }
+  .vs-panel:not(.grow) .vs-panel-body {
+    max-height: 140px;
+  }
+}
+
+/* New Document dialog */
+.vs-modal-newdoc {
+  width: 720px;
+  max-width: 92vw;
+}
+
+.nd-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+}
+
+.nd-presets {
+  overflow-y: auto;
+  max-height: 340px;
+  padding-right: 6px;
+}
+
+.nd-group {
+  margin-bottom: 12px;
+}
+
+.nd-group-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.nd-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.nd-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  color: var(--text);
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+  text-align: left;
+}
+
+.nd-tile:hover {
+  background: var(--bg-active);
+}
+
+.nd-tile.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, var(--bg-hover));
+}
+
+.nd-tile-label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.nd-tile-size {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+.nd-main {
+  min-width: 0;
+}
+
+.nd-preset-hint {
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.nd-size-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nd-size-row .vs-input {
+  width: 74px;
+  flex: 1;
+}
+
+.nd-size-row .nd-unit {
+  width: 62px;
+  flex: none;
+}
+
+.nd-times {
+  color: var(--text-dim);
+}
+
+.nd-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.nd-seg-btn {
+  padding: 5px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  color: var(--text);
+  font-size: 11px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.nd-seg-btn:hover {
+  background: var(--bg-active);
+}
+
+.nd-seg-btn.active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg-hover));
+  color: var(--text);
+  font-weight: 600;
+}
+
+.nd-color {
+  width: 40px !important;
+  height: 28px !important;
+  margin-left: 6px;
+  padding: 0 !important;
+  border-radius: var(--radius-sm);
+}
+
+.nd-summary {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.nd-summary-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* ── AI panel ─────────────────────────────────────────────── */
+
+.vs-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.vs-ai-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.vs-ai-dot.on { background: #3ecf6e; }
+.vs-ai-dot.off { background: #e05252; }
+
+.vs-ai-mock-badge {
+  padding: 6px 8px;
+  border: 1px solid #b7833a;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, #b7833a 16%, var(--bg-panel));
+  color: #f0b25f;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.vs-ai-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.vs-ai-status-label {
+  color: var(--text-muted);
+}
+
+.vs-ai-status-pill {
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+.vs-ai-status-pill.ok { background: color-mix(in srgb, #3ecf6e 18%, var(--bg-panel)); color: #3ecf6e; }
+.vs-ai-status-pill.bad { background: color-mix(in srgb, #e05252 18%, var(--bg-panel)); color: #ff8585; }
+
+.vs-ai-unavailable {
+  padding: 8px;
+  border: 1px solid color-mix(in srgb, #e05252 45%, var(--border));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, #e05252 10%, var(--bg-panel));
+  color: #ffb3b3;
+  line-height: 1.5;
+}
+
+.vs-ai-run {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vs-ai-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.vs-ai-quick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.vs-ai-quick-btn {
+  font-size: 11px;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.vs-ai-sel-badge {
+  padding: 5px 8px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-panel));
+  color: #9db8ff;
+  font-size: 11px;
+}
+
+.vs-ai-error {
+  padding: 8px;
+  border: 1px solid color-mix(in srgb, #e05252 45%, var(--border));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, #e05252 10%, var(--bg-panel));
+  color: #ffb3b3;
+  font-size: 11px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.vs-ai-result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  background: var(--bg-panel-alt);
+}
+
+.vs-ai-result-canvas {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: repeating-conic-gradient(#252930 0 25%, #202329 0 50%) 0 0 / 12px 12px;
+}
+.vs-ai-result-canvas canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  background: #181a1f;
+}
+
+.vs-ai-result-text {
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.vs-ai-result-json {
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: #181a1f;
+  color: #a9b6c9;
+  overflow-x: auto;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.vs-ai-jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vs-ai-empty {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.vs-ai-job {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 7px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-panel-alt);
+}
+
+.vs-ai-job-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.vs-ai-job-label {
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vs-ai-job-status {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 1px 6px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.vs-ai-job-status.queued, .vs-ai-job-status.running { background: color-mix(in srgb, var(--accent) 18%, var(--bg-panel)); color: #a9c4ff; }
+.vs-ai-job-status.completed { background: color-mix(in srgb, #3ecf6e 18%, var(--bg-panel)); color: #3ecf6e; }
+.vs-ai-job-status.failed { background: color-mix(in srgb, #e05252 18%, var(--bg-panel)); color: #ff8585; }
+.vs-ai-job-status.cancelled { background: color-mix(in srgb, #999 18%, var(--bg-panel)); color: #aaa; }
+
+.vs-ai-progress {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+}
+.vs-ai-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.15s ease;
+}
+
+.vs-ai-job-error {
+  font-size: 11px;
+  color: #ffb3b3;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.vs-ai-job-actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.vs-ai-job-actions .vs-btn.sm {
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+/* ── Product compositing panel ─────────────────── */
+
+.vs-product {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.vs-product-hint,
+.vs-product-layerinfo {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.vs-product-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.vs-product-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vs-product-stack.row {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.vs-product-stack.row .vs-btn {
+  flex: 1 1 auto;
+}
+
+.vs-product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.vs-product-num {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.vs-product-slider {
+  display: grid;
+  grid-template-columns: 92px 1fr 44px;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.vs-product-slider-label {
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vs-product-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent, #4a7dff);
+}
+
+.vs-product-slider-value {
+  text-align: right;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.vs-btn.danger {
+  background: color-mix(in srgb, #e05252 16%, var(--bg-panel));
+  color: #ff8585;
+}
+
+.vs-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.vs-panel-sep {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* ── 3D workspace ─────────────────────────────── */
+
+.vs-3d-area {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.vs-3d-canvas-host {
+  position: absolute;
+  inset: 0;
+}
+
+.vs-3d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.vs-3d-canvas:active {
+  cursor: grabbing;
+}
+
+.vs-3d-status {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 6px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.vs-3d-unavailable {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+}
+
+.vs-toolbar.vs-3d-toolbar {
+  width: 46px;
+}
+
+.vs-options-bar.vs-3d-options {
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.vs-3d-toolbar-sep {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 3px 0;
+}
+
+.vs-3d-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.vs-3d-inspector {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.vs-3d-section {
+  border-top: 1px solid var(--border);
+  padding: 8px 6px;
+}
+
+.vs-3d-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.vs-field.vs-3d-field {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.vs-field.vs-3d-field > span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.vs-3d-vec3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.vs-3d-inline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.vs-3d-dropzone {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Before/After comparison view ── */
+.vs-compare-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #1b1e24;
+  overflow: hidden;
+}
+
+.vs-compare-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.vs-compare-canvas:active {
+  cursor: grabbing;
+}
+
+.vs-compare-badge {
+  position: absolute;
+  top: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(17, 19, 24, 0.78);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+  z-index: 12;
+}
+
+.vs-compare-badge-before {
+  left: 12px;
+}
+
+.vs-compare-badge-after {
+  right: 12px;
+}
+
+.vs-compare-unavailable {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 13;
+  max-width: 360px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(17, 19, 24, 0.9);
+  border: 1px solid rgba(163, 64, 60, 0.6);
+  color: #e8b4b0;
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+.vs-compare-controls {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 12;
+  background: rgba(17, 19, 24, 0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.vs-compare-modes {
+  display: flex;
+  gap: 2px;
+}
+
+.vs-compare-mode-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.vs-compare-mode-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-compare-mode-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent-hover);
+}
+
+.vs-compare-fit-btn,
+.vs-compare-close-btn {
+  width: 26px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-compare-fit-btn:hover,
+.vs-compare-close-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.vs-compare-close-btn:hover {
+  background: #a3403c;
+  color: #fff;
+}
+
+.vs-compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  margin-left: -11px;
+  cursor: ew-resize;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.vs-compare-handle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.vs-compare-handle-knob {
+  width: 22px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(17, 19, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.vs-compare-handle-knob::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  height: 8px;
+  transform: translateY(-50%);
+  border-left: 2px solid rgba(255, 255, 255, 0.8);
+  border-right: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 2px;
+}
+
+.vs-compare-handle:focus-visible .vs-compare-handle-knob {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.vs-compare-opacity-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(17, 19, 24, 0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.vs-compare-opacity-bar input[type="range"] {
+  width: 160px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.vs-compare-opacity-value {
+  min-width: 34px;
+  text-align: right;
+  color: var(--text);
+  font-family: var(--font-mono);
+}

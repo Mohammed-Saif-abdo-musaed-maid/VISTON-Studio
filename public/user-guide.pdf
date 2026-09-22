@@ -1,0 +1,50 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 1700 >>
+stream
+BT /F1 22 Tf 56 800 Td (VISTON Studio - User Guide) Tj ET
+BT /F1 11 Tf 56 780 Td (Welcome to VISTON Studio, a professional image editor.) Tj ET
+BT /F1 11 Tf 56 766 Td (This guide explains how to use the main features of the system.) Tj ET
+BT /F1 14 Tf 56 736 Td (1. Getting Started) Tj ET
+BT /F1 11 Tf 56 720 Td (Use File > New Project to create a document, or File > Open to open an existing project.) Tj ET
+BT /F1 11 Tf 56 706 Td (Project files are saved and reopened with the same File menu commands.) Tj ET
+BT /F1 14 Tf 56 676 Td (2. Editing Images) Tj ET
+BT /F1 11 Tf 56 660 Td (Use the left toolbar tools to draw with the Brush, Pencil, Eraser and Shape tools.) Tj ET
+BT /F1 11 Tf 56 646 Td (The Layers panel manages your layers, and the Properties panel edits the active layer.) Tj ET
+BT /F1 11 Tf 56 632 Td (Text can be added with the Text tool; selections are made with the Selection tools.) Tj ET
+BT /F1 14 Tf 56 602 Td (3. Adjustments and Filters) Tj ET
+BT /F1 11 Tf 56 586 Td (Open the Adjust menu for Levels, Curves, Brightness and other color corrections.) Tj ET
+BT /F1 11 Tf 56 572 Td (The Filter menu provides Blur, Sharpen, Edge Detection and restoration filters.) Tj ET
+BT /F1 14 Tf 56 542 Td (4. Exporting) Tj ET
+BT /F1 11 Tf 56 526 Td (Use File > Export As to save the result as PNG, JPEG, WebP or BMP.) Tj ET
+BT /F1 11 Tf 56 512 Td (For PDF support, keep this guide updated alongside the application.) Tj ET
+BT /F1 14 Tf 56 482 Td (5. 3D Workspace) Tj ET
+BT /F1 11 Tf 56 466 Td (The 3D menu opens the 3D workspace for objects, lights, scenes and rendering.) Tj ET
+BT /F1 11 Tf 56 452 Td (Use AI menu for intelligent image tasks; the Product panel composes product photos.) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000338 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2089
+%%EOF

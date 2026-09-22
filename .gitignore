@@ -1,0 +1,30 @@
+node_modules/
+dist/
+.vite/
+coverage/
+*.log
+*.log.*
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/*.log
+*.tmp
+*.temp
+
+# Android / Gradle generated files
+android/.gradle/
+android/build/
+android/app/build/
+android/.idea/
+
+# IDE
+.idea/
+
+# Signing files
+*.keystore
+*.jks
+
+# Build and release artifacts
+release/

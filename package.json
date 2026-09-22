@@ -1,0 +1,73 @@
+{
+  "name": "vision-studio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Vision Studio — Professional Image Editor",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "tauri": "tauri",
+    "desktop": "npm run build && electron .",
+    "smoke": "npm run build && electron . --smoke",
+    "build:desktop": "npm run build && electron-builder --win",
+    "android:sync": "npm run build && cap sync android",
+    "build:android": "npm run build && cap sync android && cd android && gradlew.bat assembleDebug"
+  },
+  "build": {
+    "appId": "com.viston.studio",
+    "productName": "VISTON Studio",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "public/icons/viston-ms-512.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "VISTON Studio",
+      "artifactName": "VISTON-Studio-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "VISTON-Studio-Windows-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "@capacitor/core": "^8.5.2",
+    "@types/three": "^0.186.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.186.0",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@tauri-apps/cli": "^2.1.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^44.4.3",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3",
+    "vitest": "^5.0.1"
+  }
+}

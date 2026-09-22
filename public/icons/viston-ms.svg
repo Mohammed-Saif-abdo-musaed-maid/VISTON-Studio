@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <!-- Background gradient: deep navy -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#112b50"/>
+      <stop offset="100%" stop-color="#071326"/>
+    </linearGradient>
+    <!-- Letter gradient: white to light cyan (consistent across the "MS" artwork) -->
+    <linearGradient id="letterGrad" x1="0" y1="170" x2="0" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="62%" stop-color="#e4f6ff"/>
+      <stop offset="100%" stop-color="#5fc4ee"/>
+    </linearGradient>
+    <!-- Glossy glass highlight -->
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Cyan glow for the focus frame -->
+    <linearGradient id="frameGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3fc4f8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <!-- Soft dark drop shadow + cyan halo for letter depth -->
+    <filter id="letterDepth" x="-30%" y="-40%" width="160%" height="180%">
+      <feDropShadow in="SourceGraphic" dx="0" dy="10" stdDeviation="12" flood-color="#020a1a" flood-opacity="0.55" result="sh1"/>
+      <feDropShadow in="SourceGraphic" dx="0" dy="0" stdDeviation="16" flood-color="#2fb4f2" flood-opacity="0.30" result="sh2"/>
+      <feMerge>
+        <feMergeNode in="sh1"/>
+        <feMergeNode in="sh2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Clip for the rounded-square icon -->
+    <clipPath id="roundedClip">
+      <rect x="0" y="0" width="512" height="512" rx="100" ry="100"/>
+    </clipPath>
+  </defs>
+
+  <!-- Rounded-square background -->
+  <rect width="512" height="512" rx="100" ry="100" fill="url(#bg)"/>
+
+  <!-- Subtle cyan edge glow inside the icon border -->
+  <rect x="3" y="3" width="506" height="506" rx="97" ry="97" fill="none" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="3"/>
+
+  <!-- Gentle radial cyan back-glow behind the letters -->
+  <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0%" stop-color="#29b6f6" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="#29b6f6" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="256" cy="252" r="210" fill="url(#halo)"/>
+
+  <!-- Glossy glass highlight (top half) -->
+  <rect x="0" y="0" width="512" height="252" fill="url(#gloss)" clip-path="url(#roundedClip)"/>
+
+  <!-- Focus / selection frame around the MS glyphs -->
+  <rect x="70" y="136" width="372" height="246" rx="16" ry="16" fill="none" stroke="url(#frameGrad)" stroke-width="3" stroke-opacity="0.5"/>
+
+  <!-- Geometric M (bold monogram stroke) -->
+  <g filter="url(#letterDepth)">
+    <path
+      d="M104 346 L104 172 L178 259 L252 172 L252 346"
+      fill="none"
+      stroke="url(#letterGrad)"
+      stroke-width="40"
+      stroke-linecap="butt"
+      stroke-linejoin="miter"
+      stroke-miterlimit="4"
+    />
+    <!-- Geometric S (bold monogram stroke) -->
+    <path
+      d="M402 178 C388 156 354 156 342 176 C330 196 336 214 362 226 C390 238 406 254 406 280 C406 314 374 346 338 346 C324 346 318 338 322 326"
+      fill="none"
+      stroke="url(#letterGrad)"
+      stroke-width="40"
+      stroke-linecap="butt"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>
